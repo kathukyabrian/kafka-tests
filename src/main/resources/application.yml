@@ -1,0 +1,3 @@
+logging:
+  level:
+    tech.kitucode.kafka-tests: DEBUG
