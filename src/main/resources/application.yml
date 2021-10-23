@@ -12,4 +12,14 @@ spring:
     consumer:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            value:
+              default:
+                type: tech.kitucode.kafkatests.domain.Friend
+            trusted-packages: tech.kitucode.kafkatests
       group-id: "friend"
+
+    #spring.kafka.consumer.properties.spring.json.value.default.type=com.example.Invoice
+    #spring.kafka.consumer.properties.spring.json.trusted.packages=com.example,org.acme

@@ -1,5 +1,7 @@
 package tech.kitucode.kafkatests.controller;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 import tech.kitucode.kafkatests.domain.Friend;
@@ -7,6 +9,7 @@ import tech.kitucode.kafkatests.service.FriendService;
 
 import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class FriendResource {
@@ -29,5 +32,11 @@ public class FriendResource {
     @GetMapping("/friend")
     public Map<String,Friend> getAll(){
         return friendService.getAll();
+    }
+
+    @KafkaListener(topics = "friend", groupId = "friend")
+    @GetMapping("/kafka/friend")
+    public void getFromKafka(Friend friend){
+        log.info("Consumed : {}",friend);
     }
 }
